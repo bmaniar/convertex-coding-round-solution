@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DynamicField from '../dynamicField';
 
-const UserDetailTable = ({ userData }) => {
+const UserDetailTable = ({ userData, onChange }) => {
     return (
         <table>
             <thead>
@@ -13,16 +13,11 @@ const UserDetailTable = ({ userData }) => {
             </thead>
             <tbody>
                 {userData.map((data, key) => {
-                    const field = {
-                        value: data.value,
-                        type: data.type,
-                        options: data.options
-                    }
                     return (
                         <tr key={key}>
                             <td>{data.label}</td>
                             <td>
-                                <DynamicField field={field} />
+                                <DynamicField fieldData={data} onChange={onChange} />
                             </td>
                             <td>{data.description}</td>
                         </tr>

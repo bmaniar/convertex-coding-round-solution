@@ -1,19 +1,20 @@
 import React from "react";
 
-const DynamicField = ({ field }) => {
-    const renderField = (field) => {
+const DynamicField = ({ fieldData, onChange }) => {
+    const renderField = (fieldData) => {
+        const target = fieldData.key;
         let returnElement = <div />;
-        if (field.type === 'text') {
+        if (fieldData.type === 'text') {
             returnElement = <input
                 className="form-input"
-                type={field.type}
-                value={field.value}
-                onChange={(e) => { }}
+                type={fieldData.type}
+                value={fieldData.value}
+                onChange={(e) => { onChange(e, target) }}
             />
-        } else if (field.type == "select") {
-            returnElement = <select value={field.value} onChange={(e) => { }}>
+        } else if (fieldData.type == "select") {
+            returnElement = <select value={fieldData.value} onChange={(e) => { onChange(e, target) }}>
                 {
-                    field.options.map((option) => {
+                    fieldData.options.map((option) => {
                         return (
                             <option
                                 className="form-input"
@@ -23,18 +24,18 @@ const DynamicField = ({ field }) => {
                     })
                 }
             </select>;
-        } else if (field.type == "check") {
+        } else if (fieldData.type == "check") {
             returnElement = <div className="form-group-checkbox">
                 <input
                     className="form-input"
                     type="checkbox"
-                    checked={field.value}
-                    onChange={(e) => { }}
+                    checked={fieldData.value}
+                    onChange={(e) => { onChange(e, target) }}
                 />
             </div>
         }
         return returnElement;
     }
-    return renderField(field);
+    return renderField(fieldData);
 }
 export default DynamicField;

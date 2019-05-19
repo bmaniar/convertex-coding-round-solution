@@ -10,6 +10,7 @@ class App extends Component {
         this.state = {
             userData: []
         }
+        this.onChange = this.onChange.bind(this);
     }
     componentDidMount() {
         axios.get("http://localhost:8000/api/initialvalues").then((response) => {
@@ -20,11 +21,23 @@ class App extends Component {
             })
         })
     }
+    onChange(e, target) {
+        let field = this.state.userData.find ((d) => d.key === target);
+        field.value = field.type === 'check' ?  !field.value : e.target.value;
+        this.setState({
+            userData: [
+                ...this.state.userData.map((d) => {
+                    return d.key !== target ? d : field;
+                }),  
+            ]
+        });
+        console.log(target, e.target.value);
+    }
     render() {
         return (
             <div className="App">
                 <TopBar />
-                <UserDetailTable userData={this.state.userData} />
+                <UserDetailTable userData={this.state.userData} onChange={this.onChange} />
             </div>
         );
     }
