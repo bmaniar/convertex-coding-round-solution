@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DynamicField from '../dynamicField';
-
+import { Table } from 'reactstrap';
+import './_userDetailTable.scss';
 const UserDetailTable = ({ userData, onChange }) => {
     return (
-        <table>
+        <Table className="table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -24,7 +25,7 @@ const UserDetailTable = ({ userData, onChange }) => {
                     )
                 })}
             </tbody>
-        </table>
+        </Table>
     );
 }
 export default UserDetailTable;

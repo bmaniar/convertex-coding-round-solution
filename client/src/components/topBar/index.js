@@ -1,10 +1,10 @@
 import React from "react";
-import './topBar.scss';
+import './_topBar.scss';
 
 const TopBar = () => {
     return (
-        <header className="header">
-            User Details
+        <header className="d-flex justify-content-center header">
+            User Data
         </header>
     );
 }

@@ -1,18 +1,18 @@
 import React from "react";
-
+import { Input, Label, FormGroup } from 'reactstrap';
 const DynamicField = ({ fieldData, onChange }) => {
     const renderField = (fieldData) => {
         const target = fieldData.key;
         let returnElement = <div />;
         if (fieldData.type === 'text') {
-            returnElement = <input
+            returnElement = <Input
                 className="form-input"
                 type={fieldData.type}
                 value={fieldData.value}
                 onChange={(e) => { onChange(e, target) }}
             />
         } else if (fieldData.type == "select") {
-            returnElement = <select value={fieldData.value} onChange={(e) => { onChange(e, target) }}>
+            returnElement = <Input type="select" value={fieldData.value} onChange={(e) => { onChange(e, target) }}>
                 {
                     fieldData.options.map((option) => {
                         return (
@@ -23,19 +23,23 @@ const DynamicField = ({ fieldData, onChange }) => {
                         );
                     })
                 }
-            </select>;
+            </Input>;
         } else if (fieldData.type == "check") {
             returnElement = <div className="form-group-checkbox">
-                <input
-                    className="form-input"
-                    type="checkbox"
-                    checked={fieldData.value}
-                    onChange={(e) => { onChange(e, target) }}
-                />
+                <Label check>
+                    <Input
+                        type="checkbox"
+                        checked={fieldData.value}
+                        onChange={(e) => { onChange(e, target) }}
+                    />
+                </Label>
             </div>
         }
         return returnElement;
     }
-    return renderField(fieldData);
+    return (
+        <FormGroup>
+            {renderField(fieldData)}
+        </FormGroup>)
 }
 export default DynamicField;
