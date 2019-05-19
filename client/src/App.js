@@ -11,9 +11,10 @@ class App extends Component {
             userData: []
         }
         this.onChange = this.onChange.bind(this);
+        this.onSave = this.onSave.bind(this);
     }
     componentDidMount() {
-        axios.get("http://localhost:8000/api/initialvalues").then((response) => {
+        axios.get('http://localhost:8000/api/initialvalues').then((response) => {
             this.setState(() => {
                 return {
                     userData: response.data
@@ -33,11 +34,17 @@ class App extends Component {
         });
         console.log(target, e.target.value);
     }
+    onSave(){
+        axios.post('http://localhost:8000/api/savevalues',  {
+            userData: this.state.userData
+        });
+    }
     render() {
         return (
             <div className="App">
                 <TopBar />
                 <UserDetailTable userData={this.state.userData} onChange={this.onChange} />
+                <button onClick={this.onSave}>Save</button>
             </div>
         );
     }
