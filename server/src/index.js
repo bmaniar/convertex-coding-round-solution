@@ -13,7 +13,7 @@ app.use(morgan('dev'));
 
 app.use(cors());
 
-app.use('/', routes);
+app.use('/api', routes);
 
 app.server.listen(process.env.PORT || 8000, () => {
     console.log(`Started on port ${app.server.address().port}`);
